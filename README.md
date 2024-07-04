@@ -24,6 +24,18 @@ cmake --build zxing-cpp.release -j8 --config Release
 
 之后就是正常的引入静态库的环境配置了，不再介绍。
 
+另外一提，我们提供的第一个版本是在 win11 环境，使用 msvc 2022 编译的，实测 vs2022+OpenCV4、OpenCV3，以及和 qt5.12 的 msvc2017 都是可以正常使用。但是呢，移植到 win10 不行，我实测是直接报库损坏的链接错误，然后就自己重新又编译了一个版本，也就是第二个版本。
+
+并且，需要注意，这三条编译命令并不是万能的，比如在某些时候，CMake 会莫名其妙选择到了 32 位的编译器进行编译，当你觉得编译成功了，使用的时候，却报了一个链接错误。cmake 执行的时候会输出很多日志，注意编译器目录，如果是 x86 下面的，那就是 32 位了。
+
+我在使用 msvc2017 编译第二个版本 debug 的时候，使用的是：
+
+```cmake
+ cmake -S zxing-cpp -B zxing-cpp.debug -DCMAKE_BUILD_TYPE=Debug -G "Visual Studio 15 2017 Win64" -DCMAKE_BUILD_TYPE=Debug
+```
+
+必须要指明 `win64` 才会寻找到 x64 文件夹下的 cl.exe，不然都是 x86。
+
 ## OpenCV
 
 ZXing 理论上不依赖 OpenCV 等其它库，不过涉及图形操作，我们的第一选择基本也就是 OpenCV 了。实测 OpenCV3 与 OpenCV4 都可使用。
@@ -167,6 +179,10 @@ for (int y = 0; y < height; ++y) {
     }
 }
 ```
+
+---
+
+还有缓存......
 
 ---
 
