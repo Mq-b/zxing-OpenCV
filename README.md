@@ -38,7 +38,7 @@ cmake --build zxing-cpp.release -j8 --config Release
 
 ## OpenCV
 
-ZXing 理论上不依赖 OpenCV 等其它库，不过涉及图形操作，我们的第一选择基本也就是 OpenCV 了。实测 OpenCV3 与 OpenCV4 都可使用。
+ZXing 不依赖 OpenCV 等其它库，不过涉及图形操作，我们的第一选择基本也就是 OpenCV 了。实测 OpenCV3 与 OpenCV4 都可使用。
 
 ## OpenCV + Zxing 根据字符串生成 PDF417 条形码
 
@@ -78,7 +78,9 @@ int main() {
 
 ![1](image/运行示例.png)
 
-实测扫码枪可以识别。实测不管 windows 是否开启全局 utf8，都可正常识别数据。（未测试中文）
+实测扫码枪可以识别。实测不管 windows 是否开启全局 utf8，都可正常识别数据（英文字符）。
+
+> **注意**：ZXing 个人实测[不支持](https://github.com/zxing-cpp/zxing-cpp/issues/819)任何非 ASCII 字符，尝试过中文，以及其它特殊字符（如希腊字符 `β`）均不可，不管你是 windows 开启了全局 utf-8，还是使用什么别的编码，均不可。
 
 我们稍微详细的来解释一下上面的代码。
 
