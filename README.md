@@ -80,7 +80,7 @@ int main() {
 
 实测扫码枪可以识别。实测不管 windows 是否开启全局 utf8，都可正常识别数据（英文字符）。
 
-> **注意**：ZXing 个人实测[不支持](https://github.com/zxing-cpp/zxing-cpp/issues/819)任何非 ASCII 字符，尝试过中文，以及其它特殊字符（如希腊字符 `β`）均不可，不管你是 windows 开启了全局 utf-8，还是使用什么别的编码，均不可。
+> **注意**：人实测 ZXing 在设置了执行字符集与源字符集均为 utf-8 的情况下，可以支持中文。但是在一台电脑中出现了无法解析出希腊字符 `β` ，但是却支持中文的问题。在我本机开启了全局 utf-8  的 windows 电脑上则是希腊字符与中文都支持。可以参见 [ZXing issue](https://github.com/zxing-cpp/zxing-cpp/issues/819)。
 
 我们稍微详细的来解释一下上面的代码。
 
